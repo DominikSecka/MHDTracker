@@ -1,0 +1,38 @@
+.form_icon{
+    font-size: 2.5em !important;
+    margin-left: 10px !important;
+    color: #387ef5;
+}
+
+.margin{
+    margin-left: 16px !important;
+    margin-right: 5px !important;
+}
+
+.vehicle_icon{
+    font-size: 2.5em !important;
+    color: #387ef5;
+}
+
+.label_text{
+    margin-left: 15px !important;
+    position: absolute !important;
+    margin-top: 8px !important;
+    font-size: 1.2em !important;
+    color: #387ef5;
+}
+
+.checkbox_vehicle{
+    margin-left: 15px !important;
+}
+
+.radio_icon{
+    margin-right: 10px !important;
+    margin-left: 15px !important;
+}
+
+.main_sex_icon{
+    font-size: 1em !important;
+    margin-left: 8px !important;
+    color: #387ef5;
+}

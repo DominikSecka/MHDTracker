@@ -1,0 +1,40 @@
+<div class="container-fluid custom-modal-container">
+    <div class="row custom-modal-header">
+        <div class="col-sm-12 modal-header">
+            <i style="margin-top: -16px" class="ion-ios-contacts-outline modal-header-icon"></i>
+            <label style="margin-left: 50px" class="modal-header-label">Vodič - Prihlásenie</label>
+            <button class="modal-cancel-button" (click)="closeDialog()"><i class="ion-ios-close-circle-outline"></i></button>
+            <button style="margin-right: 5px" class="modal-cancel-button" (click)="backToChoose()"><i class="ion-ios-arrow-dropleft-outline"></i></button>
+        </div>
+    </div>
+    <div class="col-md-4" style="margin-bottom: 40px">
+        <img src="images/user.svg">
+    </div>
+    <div class="col-md-8 login-form-div">
+        <form [formGroup]="driverLoginForm">
+            <div class="form-line">
+                <div style="height: 10px">
+                    <div class="error-box" *ngIf="formErrors.email">
+                        {{formErrors.email}}
+                    </div>
+                </div>
+                <i style="margin-top: -20px" class="ion-ios-mail-open-outline form-input-icon"></i>
+                <input class="login-input login-email-input" formControlName="email" placeholder="e-mail">
+            </div>
+            <div class="form-line">
+                <div class="error-box" *ngIf="formErrors.password">
+                    {{formErrors.password}}
+                </div>
+                <i style="margin-left: 3px; margin-top: -20px" class="ion-ios-unlock-outline form-input-icon"></i>
+                <input style="width: 77%;" class="login-input login-password-input" type="{{ showPassword ? 'text' : 'password' }}" formControlName="password" placeholder="heslo">
+                <i (click)="showHidePasswd()" class="{{ showPassword ? 'ion-ios-eye vision-icon' : 'ion-ios-eye-outline vision-icon' }}"></i>
+            </div>
+            <div class="form-line">
+                <button style="width: 99.5%; margin-bottom: 0" class="simple-modal-button" (click)="loginDriver()" [disabled]="!driverLoginForm.valid">Prihlásiť</button>
+            </div>
+            <div class="form-line">
+                <button style="width: 99.5%" class="secondary-modal-button" (click)="forgotPassword()">Zabudli ste heslo?</button>
+            </div>
+        </form>
+    </div>
+</div>

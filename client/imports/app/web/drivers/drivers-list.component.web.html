@@ -1,0 +1,50 @@
+<span defaultOverlayTarget></span>
+<div class="row tools-div">
+    <form class="navbar-form">
+        <i class="ion-ios-search-outline search-icon grey-text"></i>
+        <input type="text" class="form-control" placeholder="Hľadať" (input)="searchValuechange($event.target.value)">
+    </form>
+
+    <button type="button" class="btn btn-default btn-lg grey-text" (click)="createNewDriver()">
+        <i class="ion-ios-person-add-outline button-icon"></i><label class="button-label">Pridať vodiča</label>
+    </button>
+</div>
+
+<loader *ngIf="!drivers"></loader>
+
+<label *ngIf ="drivers && driversSize === 0">Not found</label>
+
+<ul *ngIf="drivers && driversSize !== 0" class="list-group drivers-list-group">
+    <li *ngFor="let driver of drivers | async | paginate: { id: '1', itemsPerPage: 10, currentPage: page, totalItems: driversSize }" class="list-group-item drivers-item-content">
+        <div class="row driver-item-row">
+            <img *ngIf="!driver.pictureUrl" class="driver-item-picture" src="images/user.svg">
+            <img *ngIf="driver.pictureUrl" class="driver-item-picture" [src]="driver.pictureUrl">
+            <div class="driver-item-info">
+                <label class="driver-item-title"><span class="blue-text">{{driver.name}}</span></label>
+                <p class="info"><span class="blue-text">Rating: </span>{{driver.rating | number:'2.0-2'}}% <span class="blue-text">Oprávnenie: </span>
+                    <i *ngIf="driver.bus" class="ion-ios-bus right-button-icon"></i>
+                    <i *ngIf="driver.tram" class="ion-ios-train right-button-icon"></i>
+                </p>
+            </div>
+
+            <button class="right-button" (click)="deleteDriver(driver)">
+                <i class="ion-ios-trash-outline right-button-icon"></i><br/>
+                <label class="slide-icon-text">Odstrániť</label>
+            </button>
+
+            <button class="right-button" (click)="editDriverProfile(driver)">
+                <i class="ion-ios-create-outline right-button-icon"></i><br/>
+                <label class="slide-icon-text">Upraviť</label>
+            </button>
+
+            <button class="right-button" [routerLink]="['/statistics', driver._id, 'dispatcher']">
+                <i class="ion-ios-stats-outline right-button-icon"></i><br/>
+                <label class="slide-icon-text">Štatistika</label>
+            </button>
+
+        </div>
+    </li>
+</ul>
+<div *ngIf="drivers" class="row pagination">
+    <pagination-controls class="main-pagination" (pageChange)="page = $event" id="1" autoHide="true"></pagination-controls>
+</div>

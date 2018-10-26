@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>V premávke</ion-title>
+    </ion-navbar>
+    <ion-searchbar placeholder="Hľadať" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list class="drivers-page-content">
+        <ion-item-sliding *ngFor="let ride of rides | async">
+            <ion-item class="driver" detail-push>
+                <img class="driver-picture" [src]="'images/links/'+ride.link+'.svg'">
+                <div class="driver-info">
+                    <h2 class="driver-title" style="font-size: 16px"><span *ngFor="let driver of drivers | async"><span class="blue-text" *ngIf="driver._id === ride.driver_id">{{driver.name}} <i
+                            class="ion-ios-calendar-outline"></i></span></span>
+                        {{ride.date | date: 'dd.MM.yyyy'}}</h2>
+                    <span>
+                        <p><span class="blue-text">Linka:</span> {{ride.link}} <span class="blue-text">Smer:</span>
+                        <span *ngFor="let link of links | async">
+                        <span *ngIf="ride.link === link.name && ride.direction">{{unicodeToChar(link.oneDirection)}}</span>
+                        <span *ngIf="ride.link === link.name && !ride.direction">{{unicodeToChar(link.zeroDirection)}}</span>
+                        </span>
+                        </p>
+                    </span>
+                </div>
+            </ion-item>
+            <ion-item-options class="traffic-options">
+                <button ion-button item-right icon-left class="option" color="light" (click)="monitoringClicked()">
+                    <ion-icon name="ios-analytics-outline" class="slide-icon"></ion-icon>
+                    <label class="slide-icon-text">Monitoring</label>
+                </button>
+                <button ion-button item-right icon-left class="option" color="light" (click)="onMapClicked()">
+                    <ion-icon name="ios-navigate-outline" class="slide-icon"></ion-icon>
+                    <label class="slide-icon-text">Na mape</label>
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>

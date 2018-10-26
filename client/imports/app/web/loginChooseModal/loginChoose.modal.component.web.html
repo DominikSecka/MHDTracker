@@ -1,0 +1,26 @@
+<div class="container-fluid custom-modal-container">
+    <div class="row custom-modal-header">
+        <div class="col-sm-12 modal-header">
+            <i class="ion-ios-git-network-outline modal-header-icon"></i>
+            <label class="modal-header-label">Prihlásenie</label>
+            <button class="modal-cancel-button" (click)="closeDialog()"><i class="ion-ios-close-circle-outline"></i></button>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6 login-choose-div">
+            <img src="images/dispatcher.svg" (click)="dispatcherLoginClicked()" style="cursor: pointer"/>
+            <label class="login-choose-label">Dispečer</label>
+            <div class="horizontal-buttons-div">
+                <button class="simple-modal-button" (click)="dispatcherLoginClicked()">Prihlásenie</button>
+                <button class="simple-modal-button" (click)="registerClicked()">Registrácia</button>
+            </div>
+        </div>
+        <div class="col-md-6 login-choose-div">
+            <img src="images/user.svg" (click)="driverLoginClicked()" style="cursor: pointer"/>
+            <label class="login-choose-label">Vodič</label>
+            <div class="horizontal-buttons-div">
+                <button class="simple-modal-button" (click)="driverLoginClicked()">Prihlásenie</button>
+            </div>
+        </div>
+    </div>
+</div>

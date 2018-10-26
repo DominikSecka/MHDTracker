@@ -1,0 +1,156 @@
+
+.drivers-list-group {
+  line-height: 1em;
+  padding-left: 18% !important;
+  padding-right: 18% !important;
+  margin-bottom: 0 !important;
+  min-width: 1100px;
+
+  .drivers-item-content {
+    border-radius: 0 !important;
+    border-left: none;
+    border-right: none;
+    padding-left: 3%;
+    padding-right: 3%;
+
+    .driver-item-picture {
+      float: left;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      margin-top: 2px;
+    }
+
+    .driver-item-info {
+      font-weight: 200;
+      float: left;
+      margin: 6px 0 0 20px;
+
+      .driver-item-title {
+        margin-top: 2px;
+        margin-bottom: 5px;
+      }
+
+      .info {
+        font-size: 14px;
+        font-weight: 200 !important;
+        color: gray;
+      }
+    }
+  }
+
+  .right-button {
+    float: right;
+    background: none;
+    outline: none;
+    margin-top: 2px;
+    color: gray;
+    margin-left: 10px;
+
+    .right-button-icon {
+      margin-top: 2px;
+      font-size: 2em;
+    }
+  }
+
+  .right-button:hover {
+    color: dodgerblue;
+  }
+}
+
+.driver-item-row{
+  height: 54px;
+}
+
+.btn-group-lg > .btn, .btn-lg {
+  font-size: 14px !important;
+}
+
+.btn-default {
+  display: inline-block !important;
+  margin-left: 30px !important;
+  outline: none !important;
+  border-color: transparent !important;
+}
+
+.btn-default:hover {
+  background-color: transparent !important;
+  color: dodgerblue !important;
+}
+
+.btn-default.focus, .btn-default:focus {
+  background-color: transparent !important;
+}
+
+.btn.active, .btn:active {
+  box-shadow: none !important;
+}
+
+.button-icon {
+  font-size: 1.5em;
+  position: absolute;
+  margin-top: -6px;
+}
+
+.navbar-form {
+  display: inline-block !important;
+}
+
+.button-label {
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+label {
+  font-weight: 200 !important;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+.pagination {
+  text-align: center;
+  width: 100%;
+  margin-top: 30px !important;
+  margin-bottom: 100px !important;
+}
+
+.main-pagination {
+  .ng2-pagination .current {
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+
+    div {
+      padding-top: 1.5px;
+    }
+  }
+}
+
+.stats-pagination {
+  .ng2-pagination .current {
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+
+    div {
+      padding-top: 4px;
+    }
+  }
+}
+
+.ng2-pagination a:hover {
+  cursor: pointer !important;
+  background-color: transparent !important;
+}
+
+.ng2-pagination .pagination-next a::after, .ng2-pagination .pagination-next.disabled::after {
+  content: none !important;
+}
+
+.ng2-pagination .pagination-previous a::before, .ng2-pagination .pagination-previous.disabled::before {
+  content: none !important;
+}

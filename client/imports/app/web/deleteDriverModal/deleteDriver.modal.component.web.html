@@ -1,0 +1,18 @@
+<div class="container-fluid custom-modal-container">
+    <div class="row custom-modal-header">
+        <div class="col-sm-12 modal-header">
+            <i class="ion-ios-trash-outline modal-header-icon"></i>
+            <label class="modal-header-label">Odstrániť vodiča?</label>
+        </div>
+    </div>
+    <div class="sentence-div">
+        <label class="center-sentence">Naozaj chcete odstániť vodiča
+            <img *ngIf="!context.picture" class="driver-item-picture" src="images/user.svg">
+            <img *ngIf="context.picture" class="driver-item-picture" [src]="context.pictureUrl">
+            <span class="blue-text">{{context.name}}?</span></label>
+    </div>
+    <div class="buttons-line">
+        <button class="modal-dialog-button" (click)="deleteDriver()">Odstrániť</button>
+        <button class="modal-dialog-button" (click)="closeDialog()">Zrušiť</button>
+    </div>
+</div>

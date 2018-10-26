@@ -1,0 +1,20 @@
+.cropper-div{
+  padding: 10px;
+  border: 1px dotted dodgerblue;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.preview-div{
+  padding: 10px;
+  border: 1px dotted dodgerblue;
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 30px;
+  width: 222px;
+  height: 222px;
+}
+
+.rounded-picture{
+  border-radius: 50% !important;
+}

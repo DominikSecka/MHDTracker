@@ -1,0 +1,19 @@
+<div class="container-fluid custom-modal-container">
+    <div class="row custom-modal-header">
+        <div class="col-sm-12 modal-header">
+            <i class="ion-ios-paper-plane-outline modal-header-icon"></i>
+            <label class="modal-header-label">Upozorniť</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group-warning">
+            <label for="comment" class="warning-label">Znenie upozornenia:</label>
+            <textarea autocomplete="off" spellcheck="false" [(ngModel)]="message"
+                      class="form-control-warning" rows="5" id="comment"></textarea>
+        </div>
+    </div>
+    <div class="buttons-line">
+        <button class="modal-dialog-button" (click)="sendWarning()">Odoslať upozornenie</button>
+        <button class="modal-dialog-button" (click)="closeDialog()">Zrušiť</button>
+    </div>
+</div>

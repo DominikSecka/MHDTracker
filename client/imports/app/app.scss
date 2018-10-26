@@ -1,0 +1,34 @@
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+
+@import './mobile/drivers/drivers.component.mobile';
+@import './web/drivers/drivers-list.component.web';
+@import './web/header/header-dispecing.component.web';
+@import './web/tabs/tabs.component.web';
+@import './web/on-map/on-map.component.web';
+@import './web/traffic/traffic-list.component.web';
+@import './web/addDriverModal/addDriver.modal.component.web';
+@import './web/deleteDriverModal/deleteDriver.modal.component.web';
+@import './web/cropperModal/cropper.modal.component.web';
+@import '../../../node_modules/ionicons/dist/scss/ionicons';
+@import '../../../node_modules/bootstrap/scss/bootstrap.scss';
+@import './web/statistics/statistics.component.web';
+@import './web/tools/loader/loader.component';
+@import './web/errorComponents/ridesNotFound/ridesNotFound.component';
+@import './web/monitoring/monitoring.component.web';
+@import './web/sendWarningModal/sendWarning.modal.component.web';
+@import './web/tools/chartComponent/chart.component';
+@import './web/loginChooseModal/loginChoose.modal.component.web';
+@import './web/registerModal/register.modal.component.web';
+@import './web/forgottenPassword/forgottenPassword.modal.component.web';
+@import './web/introPage/introPage.component.web';
+@import './web/tools/warningsStatsComponent/warningsStats.component';
+@import './web/settingsModal/settings.modal.component.web';
+@import './web/tools/floatingPoints/floatingPoints.component';
+@import './web/dispatcherLoginModal/dispatcherLogin.modal.component.web';
+@import './web/driverLoginModal/driverLogin.modal.component.web';
+@import './web/changePasswordModal/changePassword.modal.component.web';

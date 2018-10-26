@@ -1,0 +1,88 @@
+.rounded-div{
+  border-radius: 50%;
+  border: 1px solid dodgerblue;
+  height: 90%;
+  width: 90%;
+  position: absolute;
+  padding: 5px;
+  margin-left: -10px;
+}
+
+.outer-rounded-div{
+  text-align: center;
+  padding-bottom: 16.66667%;
+}
+
+.intro-main-div{
+  padding: 5% 12%;
+  min-width: 1214px;
+
+  .main-icon-div{
+    text-align: center;
+    min-width: 396px;
+
+    .main-title{
+      margin-top: 20px;
+      font-size: 45px;
+      color: darkgrey;
+    }
+  }
+}
+
+.animated-chart{
+  width: 100%;
+  margin-top: -8%;
+  position: absolute;
+  margin-left: -20%;
+  -ms-transform: rotate(7deg);
+  -webkit-transform: rotate(7deg);
+  transform: rotate(7deg);
+}
+
+.main-intro-stats{
+  position: absolute;
+}
+
+.text-center-div{
+  text-align: center;
+}
+
+.numbers-label{
+  font-size: 25px;
+  font-weight: 300 !important;
+}
+
+.animated-chart-div{
+  padding-left: 35px;
+  padding-right: 60px;
+  margin-top: 25px;
+  max-height: 430px;
+}
+
+.action-buttons-div{
+  float: right;
+}
+
+.intro-page-icon{
+  font-size: 55px;
+  color: darkgray;
+  margin-right: 3px;
+  margin-left: 15px;
+}
+
+.intro-page-inline-div{
+  display: inline-block;
+}
+
+.main-idea-div {
+  position: absolute;
+  font-size: 25px;
+  margin-top: -22%;
+  margin-right: 2%;
+  right: 0;
+  text-align: right;
+}
+
+.toast-message{
+  padding: 0 !important;
+}

@@ -1,0 +1,256 @@
+.modal-header{
+  margin: 10px;
+  padding-right: 20px !important;
+  border-bottom: none !important;
+
+  .modal-header-icon{
+    font-size: 3em;
+    color: dodgerblue;
+    position: absolute;
+    margin-top: -13px;
+  }
+
+  .modal-header-label{
+    font-size: 2em;
+    color: dodgerblue;
+    margin-left: 40px;
+  }
+}
+
+.modal-content{
+  width: 640px !important;
+}
+
+.add-driver-picture-button{
+  outline: none !important;
+  border: 1px solid dodgerblue;
+  color: dodgerblue;
+  border-radius: 50%;
+  padding-left: 12px;
+  padding-right: 10px;
+  position: absolute;
+  bottom: 0;
+  margin-right: 30px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  right: 0;
+  font-size: 30px;
+  width: 45px;
+  background-color: white;
+}
+
+.add-driver-picture-button:hover{
+  color: white;
+  background-color: dodgerblue;
+}
+
+.add-driver-input{
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 15px;
+  border: 1px solid gainsboro !important;
+  height: 28px;
+  margin-top: -2px;
+  padding-bottom: 3px;
+  width: 50%;
+}
+
+.mydp:focus{
+  border: 1px solid dodgerblue !important;
+}
+
+.mydp:hover{
+  border: 1px solid dodgerblue !important;
+}
+
+.form-control:hover{
+  border: 1px solid dodgerblue !important;
+}
+
+.form-control:focus{
+  border: 1px solid dodgerblue !important;
+}
+
+.navbar-form:hover .search-icon {
+  color: dodgerblue !important;
+}
+
+.search-icon:hover{
+  color: dodgerblue !important;
+}
+
+.search-icon:hover + .form-control{
+  border: 1px solid dodgerblue !important;
+}
+
+.add-driver-input:focus{
+  border: 1px solid dodgerblue !important;
+}
+
+.add-driver-input:hover{
+  border: 1px solid dodgerblue !important;
+}
+
+.login-input:focus{
+  border: 1px solid dodgerblue !important;
+}
+
+.login-input:hover{
+  border: 1px solid dodgerblue !important;
+}
+
+.password-input{
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 15px;
+  border: 1px solid gainsboro !important;
+  height: 28px;
+  margin-top: -2px;
+  padding-bottom: 3px;
+  width: 36.5%;
+}
+
+.name-input{
+  width: 41.5%;
+}
+
+.email-input{
+  width: 84%;
+}
+
+.form-line{
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.buttons-line{
+    padding-right: 20px;
+}
+
+.form-input-icon{
+  font-size: 2.5em;
+  color: dodgerblue;
+  position: absolute;
+  margin-top: -14px;
+}
+
+.vision-icon{
+  font-size: 2.5em;
+  color: dodgerblue;
+  position: absolute;
+  margin-top: -15px;
+  float: right;
+  margin-left: 10px;
+}
+
+.modal-dialog-button{
+  outline: none !important;
+  border: 1px solid dodgerblue;
+  color: dodgerblue;
+  border-radius: 20px;
+  background-color: transparent;
+  padding: 8px 10px;
+  margin-left: 8px;
+  float: right;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.modal-dialog-button:hover{
+  color: white;
+  background-color: dodgerblue;
+}
+
+.vehicle-checkbox{
+  color: gray;
+
+  .vehicle-checkbox-input{
+    margin-top: 6.3px;
+  }
+}
+
+.vehicle-checkbox:hover {
+  color: dodgerblue;
+}
+
+.sex-radio:hover {
+  color: dodgerblue;
+}
+
+.sex-radio{
+  color: gray;
+}
+
+.info-input-icon{
+  margin-right: 5px;
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
+.add-driver-info-label{
+  margin-left: 40px;
+  margin-right: 8px;
+}
+
+.add-vehicle-info-label{
+  margin-left: 20px;
+  margin-right: 8px;
+}
+
+.add-picture-div{
+  border-radius: 50%;
+  border: 1px gray dotted;
+  display: inline-block;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 172px;
+  height: 172px;
+
+  .add-driver-picture{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.tab-button:hover{
+  text-decoration: none !important;
+}
+
+.mydp .selection{
+  text-align: left !important;
+  padding-left: 10px !important;
+}
+
+.mydp .icon{
+  color: dodgerblue !important;
+}
+
+.mydp .btnclearenabled:hover, .mydp .btnpickerenabled:hover, .mydp .headertodaybtnenabled:hover, .mydp .tablesingleday:hover{
+  background-color: transparent !important;
+}
+
+.mydp .btnclearenabled:hover, .mydp .btnpickerenabled:hover, .mydp .headertodaybtnenabled:hover, .mydp .tablesingleday:hover{
+  background-color: transparent !important;
+}
+
+.mydp{
+  border-radius: 15px !important;
+}
+
+.mydp .selectiongroup{
+  background-color: transparent !important;
+}
+
+.mydp, .mydp .headertodaybtn, .mydp .monthinput, .mydp .yearinput{
+  border: 1px solid gainsboro !important;
+}
+
+.mydp .selection{
+  background-color: transparent !important;
+}
+
+.mydp .btnclear, .mydp .btnpicker, .mydp .headertodaybtn{
+  background: none !important;
+}

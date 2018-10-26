@@ -1,0 +1,49 @@
+.login-input{
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 15px;
+  border: 1px solid gainsboro !important;
+  height: 28px;
+  margin-top: -2px;
+  padding-bottom: 3px;
+  width: 90%;
+}
+
+.login-error-input{
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 15px;
+  border: 1px solid red !important;
+  height: 28px;
+  margin-top: -2px;
+  padding-bottom: 3px;
+  width: 90%;
+}
+
+.login-email-input{
+  margin-left: 35px;
+}
+
+.login-password-input{
+  margin-left: 35px;
+}
+
+.login-form-div{
+  margin-top: 3px;
+}
+
+.secondary-modal-button{
+  outline: none !important;
+  border: 1px solid gainsboro;
+  color: darkgray;
+  border-radius: 20px;
+  background-color: transparent;
+  padding: 5px 10px;
+  font-size: 15px;
+}
+
+.secondary-modal-button:hover{
+  color: white;
+  border: 1px solid dodgerblue;
+  background-color: dodgerblue;
+}

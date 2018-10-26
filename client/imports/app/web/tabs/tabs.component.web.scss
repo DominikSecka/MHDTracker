@@ -1,0 +1,62 @@
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+  border: none !important;
+}
+
+.nav-tabs>li>a{
+  background-color: transparent !important;
+}
+
+.nav{
+  margin-left: 22% !important;
+}
+
+.tabs-container{
+  min-width: 750px;
+}
+
+.tabs-line{
+  display: inline-block;
+  border-bottom: 1px solid darkgray;
+  width: 21.5%;
+  vertical-align: top;
+  margin-top: 32px;
+  position: absolute;
+  min-width: 160px;
+}
+
+.nav-tabs{
+  border-bottom: none !important;
+  margin-bottom: -20px !important;
+}
+
+.nav-tabs>li>a{
+  border: none !important;
+}
+
+.nav-tabs>li{
+  color: darkgray !important;
+}
+
+.nav-tabs>li:hover{
+  color: darkcyan !important;
+}
+
+.tab-icon{
+  font-size: 2em;
+  position: absolute;
+}
+
+.tab-title{
+  font-size: 1.4em;
+  cursor: pointer !important;
+  margin-left: 30px;
+  margin-top: 7px;
+}
+
+//body{
+//  overflow-x: hidden !important;
+//}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+  color: dodgerblue !important;
+}

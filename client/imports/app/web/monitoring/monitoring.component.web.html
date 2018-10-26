@@ -1,0 +1,132 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<loader *ngIf="!rides" marginTop="150px"></loader>
+<span defaultOverlayTarget></span>
+<div *ngIf="rides">
+    <div>
+        <div *ngFor="let ride of rides | async" class="header-page-content" style="margin-bottom: 30px">
+            <div *ngIf="ride._id === id" class="row container-header">
+                <div *ngIf="ride.link">
+                    <img class="header-picture" [src]="'images/links/'+ride.link+'.svg'">
+                    <div class="ride-link-monitoring-icon-div">
+                        <i *ngIf="!isTramRide(ride.link)" class="ion-ios-bus ride-link-monitoring-icon"></i>
+                        <i *ngIf="isTramRide(ride.link)" class="ion-ios-train ride-link-monitoring-icon"></i>
+                    </div>
+                </div>
+                <div class="monitoring-main">
+                    <label class="statistics-main-title"><span class="blue-text">Služba:</span> {{ride.service}} <span *ngFor="let driver of drivers | async" class="blue-text"><span *ngIf="driver._id === ride.driver_id">Vodič: <span class="grey-text">{{driver.name}}</span></span></span></label>
+                    <p class="driver-info-paragraph" style="margin-top: 2px"><span class="blue-text">Smer:</span> <span
+                            *ngFor="let link of links | async">
+                                    <span *ngIf="ride.link === link.name && ride.direction">{{link.oneDirection | directionToString}}</span>
+                                    <span *ngIf="ride.link === link.name && !ride.direction">{{link.zeroDirection | directionToString}}</span>
+                                </span> <span
+                            class="blue-text">Dátum:
+                        <i class="ion-ios-calendar-outline"></i></span> {{ride.date | date: 'dd.MM.yyyy'}} <span
+                            class="blue-text"><i
+                            class="ion-ios-clock-outline"></i></span> {{ride.date | date:'HH:mm:ss'}}</p>
+                </div>
+                <div class="right-div">
+                    <label class="statistics-title blue-text">Monitoring</label>
+                    <i class="ion-ios-analytics-outline statistics-header-right-icon blue-text"></i>
+                </div>
+            </div>
+        </div>
+
+        <div style="height: 250px; width: 100%; margin-bottom: 40px">
+            <div style="height: 250px; width: 100%">
+                <map-mhdtracker #map [rideId]="id" width="100%" height="250px"></map-mhdtracker>
+            </div>
+            <div class="map-button" [routerLink]="['/on-map', id]">
+                <i class="ion-ios-navigate-outline map-button-icon"></i>
+            </div>
+        </div>
+
+        <div class="row main-container">
+            <div *ngFor="let ride of rides | async" class="col-md-4"
+                 style="border-right: 1px solid gainsboro; padding-bottom: 30px">
+                <div *ngIf="ride._id === id">
+                    <label class="part-title"><i class="ion-ios-information-circle-outline"></i> Info</label>
+                    <br/>
+                    <label>
+                        <i class="ion-ios-card-outline stats-info-icon"></i>
+                        <span class="stats-info-label"><span class="stats-info-name">Vozidlo:</span>
+                        <i *ngIf="!isTramRide(ride.link)" class="ion-ios-bus right-button-icon"></i>
+                        <i *ngIf="isTramRide(ride.link)" class="ion-ios-train right-button-icon"></i>
+                    </span>
+                    </label>
+                    <br/>
+                    <label>
+                        <i class="ion-ios-star-outline stats-info-icon"></i>
+                        <span class="stats-info-label"><span class="stats-info-name">Rating:</span> {{ride.rating | number:'2.0-2' }} %</span>
+                    </label>
+                    <br/>
+                    <div class="stars-rating-div">
+                        <stars [stars-selected]="ride.rating*5/100" radius="20" stars="5" disabled="true"></stars>
+                    </div>
+                    <!--<label>-->
+                    <!--<i class="ion-ios-shuffle-outline stats-info-icon"></i>-->
+                    <!--<span class="stats-info-label"><span-->
+                    <!--class="stats-info-name">Počet jázd:</span> {{driver.no_rides}}</span>-->
+                    <!--</label>-->
+                    <!--<br/>-->
+                    <label>
+                        <i class="ion-ios-code-working-outline stats-info-icon"></i>
+                        <span class="stats-info-label"><span class="stats-info-name">Prejdená vzdialenosť:</span> {{ride.distance / 1000 | number:'.1-2'}} km</span>
+                    </label>
+                    <br/>
+                    <label>
+                        <i class="ion-ios-stopwatch-outline stats-info-icon"></i>
+                        <span class="stats-info-label"><span class="stats-info-name">Čas za volantom:</span> {{ride.duration-3600000 | date:'HH:mm:ss'}}</span>
+                    </label>
+                    <br/>
+                    <label>
+                        <i class="ion-ios-speedometer-outline stats-info-icon" style="margin-left: -1px"></i>
+                        <span class="stats-info-label"><span class="stats-info-name">Maximálna rýchlosť:</span> {{ride.max_speed * 3.6 | number:'.1-2'}} km/h</span>
+                    </label>
+                    <br/>
+                    <label>
+                        <i class="ion-ios-speedometer-outline stats-info-icon" style="margin-left: -1px"></i>
+                        <span class="stats-info-label"><span class="stats-info-name">Priemerná rýchlosť:</span> {{ride.avg_speed * 3.6 | number:'.1-2'}} km/h</span>
+                    </label>
+                    <br/>
+                    <!--<label *ngIf="driver.birthday">-->
+                    <!--<i class="ion-ios-wine-outline stats-info-icon" style="margin-left: 5px"></i>-->
+                    <!--<span class="stats-info-label"><span class="stats-info-name">Narodeniny:</span> {{driver.birthday | date: 'dd.MM.yyyy'}}</span>-->
+                    <!--</label>-->
+                    <br/>
+                    <div>
+                        <label class="part-title"><i class="ion-ios-alert-outline"></i>
+                            Upozornenia</label>
+                    </div>
+                    <warnings-mhdtracker [ride_id]="ride._id"></warnings-mhdtracker>
+                    <!--<div class="col-md-12 main-warning-button-div">-->
+                        <!--<div class="warning-button" (click)="warningClicked(ride.driver_id)">-->
+                            <!--<i class="ion-ios-warning-outline warning-button-icon"></i>-->
+                        <!--</div>-->
+                        <!--<label class="warning-button-label">Upozorniť vodiča</label>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="col-md-8" style="padding-left: 40px">
+                <!--<div class="row stats-tools-div">-->
+                <!--<form class="navbar-form">-->
+                <!--<i class="ion-ios-search-outline search-icon"></i>-->
+                <!--<input type="text" class="form-control" placeholder="Hľadať">-->
+                <!--</form>-->
+                <!--</div>-->
+
+                <!--<loader *ngIf="data.length === 0"></loader>-->
+                <chart-mhdtracker [rideId]="id"></chart-mhdtracker>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

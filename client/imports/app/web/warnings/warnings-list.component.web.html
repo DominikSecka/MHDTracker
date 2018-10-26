@@ -1,0 +1,71 @@
+<div class="row tools-div">
+    <form class="navbar-form">
+        <i class="ion-ios-search-outline search-icon grey-text"></i>
+        <input type="text" class="form-control" placeholder="Hľadať" (input)="searchValueChange($event.target.value)">
+    </form>
+</div>
+
+<loader *ngIf="!warnings"></loader>
+<ul *ngIf="warnings" class="list-group drivers-list-group">
+    <li *ngFor="let warning of warnings | async | paginate: { itemsPerPage: 10, currentPage: p, totalItems: warningsCount, id: 'warnings' }" class="list-group-item drivers-item-content">
+        <div class="row driver-item-row">
+            <img *ngIf="warning.key && warning.waypoint.r >= 0 && warning.waypoint.r < 15" class="driver-item-picture" [src]="'images/warnings/'+ warning.key + 'RED.svg'">
+            <img *ngIf="warning.key && warning.waypoint.r >= 15 && warning.waypoint.r < 30" class="driver-item-picture" [src]="'images/warnings/'+ warning.key + 'DARKORANGE.svg'">
+            <img *ngIf="warning.key && warning.waypoint.r >= 30 && warning.waypoint.r < 50" class="driver-item-picture" [src]="'images/warnings/'+ warning.key + 'ORANGE.svg'">
+            <img *ngIf="warning.key && warning.waypoint.r >= 50" class="driver-item-picture" [src]="'images/warnings/'+ warning.key + 'YELLOW.svg'">
+            <div class="driver-item-info">
+                <span class="blue-text">Vodič: </span>
+                <span *ngFor="let ride of rides | async">
+                    <span *ngIf="warning.ride_id === ride._id">
+                        <span *ngFor="let driver of drivers | async">
+                            <span class="grey-text" *ngIf="driver._id === ride.driver_id">{{driver.name}}</span>
+                        </span>
+                    </span>
+                </span>
+                <span class="blue-text"> Udalosť: </span>
+                    <label *ngIf="warning.key === 'RIGHT_TURN'" class="driver-item-title">Prudké otočenie vpravo </label>
+                    <label *ngIf="warning.key === 'LEFT_TURN'" class="driver-item-title">Prudké otočenie vľavo </label>
+                    <label *ngIf="warning.key === 'ACCELERATION'" class="driver-item-title">Prudká akcelerácia </label>
+                    <label *ngIf="warning.key === 'BREAKING'" class="driver-item-title">Prudké brzdenie </label>
+                <span class="blue-text">Rating: </span>{{warning.waypoint.r | number:'1.0-2'}}%
+                <span *ngFor="let ride of rides | async">
+                    <p *ngIf="warning.ride_id === ride._id" class="info">
+                        <span class="blue-text"> Vozidlo: </span>
+                        <i *ngIf="!isTramRide(ride.link)" class="ion-ios-bus right-button-icon"></i>
+                        <i *ngIf="isTramRide(ride.link)" class="ion-ios-train right-button-icon"></i>
+                        <!--{{getAddress(warning.waypoint.l.la, warning.waypoint.l.lo)}}-->
+                        <span class="blue-text">Linka:</span> {{ride.link}} <span class="blue-text">Smer:</span>
+                            <span *ngFor="let link of links | async">
+                                <span *ngIf="ride.link === link.name && ride.direction">{{link.oneDirection | directionToString}}</span>
+                                <span *ngIf="ride.link === link.name && !ride.direction">{{link.zeroDirection | directionToString}}</span>
+                            </span>
+                        <span class="blue-text">Služba: </span>{{ride.service}}
+                    </p>
+                </span>
+            </div>
+
+            <button class="right-button" [routerLink]="['/on-map', warning.ride_id]">
+                <i class="ion-ios-navigate-outline right-button-icon"></i><br/>
+                <label class="slide-icon-text">Na mape</label>
+            </button>
+
+            <button class="right-button" [routerLink]="['/monitoring', warning.ride_id]">
+                <i class="ion-ios-analytics-outline right-button-icon"></i><br/>
+                <label class="slide-icon-text">Monitoring</label>
+            </button>
+
+            <button class="right-button" (click)="reviewedClicked(warning._id)">
+                <i class="ion-ios-checkmark-circle-outline right-button-icon"></i><br/>
+                <label class="slide-icon-text">Videné</label>
+            </button>
+
+            <button class="right-button" (click)="warningClicked(warning.ride_id)">
+                <i class="ion-ios-warning-outline right-button-icon"></i><br/>
+                <label class="slide-icon-text">Upozorniť</label>
+            </button>
+        </div>
+    </li>
+</ul>
+<div *ngIf="warnings" class="row pagination">
+    <pagination-controls class="main-pagination" (pageChange)="p = $event" autoHide="true" previousLabel="predchádzajúca" nextLabel="nasledujúca" id="warnings"></pagination-controls>
+</div>

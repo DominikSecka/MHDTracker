@@ -1,0 +1,164 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<span defaultOverlayTarget></span>
+<loader *ngIf="!driver" marginTop="24%"></loader>
+
+<div *ngIf="driver">
+    <div class="header-page-content">
+        <div class="row container-header">
+            <div class="driver-stats-settings" *ngIf="user === 'driver'">
+                <i class="ion-ios-settings-outline header-right-icon blue-text" (click)="settingsClicked()"></i>
+            </div>
+            <div class="driver-stats-settings" *ngIf="user === 'dispatcher'">
+                <i style="font-size: 34px; margin-left: 4px;" class="ion-ios-create-outline header-right-icon blue-text" (click)="editDriver()"></i>
+            </div>
+            <div style="height: 80px;">
+                <img *ngIf="!driver.pictureUrl" class="header-picture" src="images/user.svg">
+                <img *ngIf="driver.pictureUrl" style="border-radius: 50%" class="header-picture" [src]="driver.pictureUrl">
+            </div>
+            <div>
+                <label class="statistics-main-title blue-text">{{driver.name}}</label>
+                <p class="driver-info-paragraph">{{driver.email}}</p>
+            </div>
+            <div class="right-div">
+                <label class="statistics-title blue-text">Štatistika</label>
+                <i class="ion-ios-stats-outline statistics-header-right-icon blue-text"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="horizontal-line"></div>
+
+
+    <div class="row main-container">
+        <div class="col-md-4" style="border-right: 1px solid gainsboro; padding-bottom: 30px; height: 700px">
+            <label class="part-title"><i class="ion-ios-information-circle-outline"></i> Info</label>
+            <br/>
+            <label>
+                <i class="ion-ios-card-outline stats-info-icon"></i>
+                <span class="stats-info-label"><span class="stats-info-name">Oprávnenie:</span>
+                    <i *ngIf="driver.bus" class="ion-ios-bus right-button-icon"></i>
+                    <i *ngIf="driver.tram" class="ion-ios-train right-button-icon"></i>
+                </span>
+            </label>
+            <br/>
+            <label>
+                <i class="ion-ios-star-outline stats-info-icon"></i>
+                <span class="stats-info-label"><span class="stats-info-name">Rating:</span> {{driver.rating | number:'2.0-2' }} %</span>
+            </label>
+            <br/>
+            <div class="stars-rating-div">
+                <stars [stars-selected]="driver.rating*5/100" radius="20" stars="5" disabled="true"></stars>
+            </div>
+            <label>
+                <i class="ion-ios-shuffle-outline stats-info-icon"></i>
+                <span class="stats-info-label"><span
+                        class="stats-info-name">Počet jázd:</span> {{driver.no_rides}}</span>
+            </label>
+            <br/>
+            <label>
+                <i class="ion-ios-code-working-outline stats-info-icon"></i>
+                <span class="stats-info-label"><span class="stats-info-name">Prejdená vzdialenosť:</span> {{driver.total_distance / 1000 | number:'.1-2'}} km</span>
+            </label>
+            <br/>
+            <label>
+                <i class="ion-ios-stopwatch-outline stats-info-icon"></i>
+                <span class="stats-info-label"><span class="stats-info-name">Čas za volantom:</span> {{driver.total_duration-3600000 | date:'HH:mm:ss'}}</span>
+            </label>
+            <br/>
+            <label>
+                <i class="ion-ios-speedometer-outline stats-info-icon" style="margin-left: -1px"></i>
+                <span class="stats-info-label"><span class="stats-info-name">Maximálna rýchlosť:</span> {{driver.max_speed * 3.6 | number:'.1-2'}} km/h</span>
+            </label>
+            <br/>
+            <label>
+                <i class="ion-ios-speedometer-outline stats-info-icon" style="margin-left: -1px"></i>
+                <span class="stats-info-label"><span class="stats-info-name">Priemerná rýchlosť:</span> {{driver.avg_speed * 3.6 | number:'.1-2'}} km/h</span>
+            </label>
+            <br/>
+            <!--<label *ngIf="driver.birthday">-->
+            <!--<i class="ion-ios-wine-outline stats-info-icon" style="margin-left: 5px"></i>-->
+            <!--<span class="stats-info-label"><span class="stats-info-name">Narodeniny:</span> {{driver.birthday | date: 'dd.MM.yyyy'}}</span>-->
+            <!--</label>-->
+            <br/>
+            <label class="part-title" style="margin-top: 20px"><i class="ion-ios-star-outline"></i> Úspechy</label>
+            <div style="padding-left: 0; padding-right: 20px">
+                <loader *ngIf="!driver"></loader>
+                <div *ngIf="driver" style="max-width: 270px">
+                    <!--<achievements-not-found *ngIf="!driver.achievement"></achievements-not-found>-->
+
+                    <div *ngFor="let achievement of driver.achievement">
+                        <div class="col-md-6 achievement-div">
+                            <img [src]="'images/achievements/'+achievement.key+'.svg'">
+                        </div>
+                    </div>
+                    <div *ngFor="let achievement of achievements">
+                        <div *ngIf="checkAchieved(achievement)" class="col-md-6 achievement-div">
+                            <img class="grey-achievement" [src]="'images/achievements/'+achievement+'_GREY.svg'">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8" style="padding-left: 40px">
+            <div class="row stats-tools-div">
+                <form class="navbar-form">
+                    <i class="ion-ios-search-outline search-icon grey-text"></i>
+                    <input type="text" class="form-control" placeholder="Hľadať" (input)="searchValueChange($event.target.value)">
+                </form>
+            </div>
+
+            <loader *ngIf="!rides"></loader>
+            <rides-not-found *ngIf="rides_count === 0 && rides"></rides-not-found>
+            <ul *ngIf="rides" class="list-group rides-list-group">
+                <li *ngFor="let ride of rides | async | paginate: { itemsPerPage: 8, currentPage: p, totalItems: rides_count, id: 'rides' }"
+                    class="list-group-item drivers-item-content">
+                    <div class="row driver-item-row">
+                        <img class="driver-item-picture" [src]="'images/links/'+ride.link+'.svg'">
+                        <div class="ride-link-stats-icon-div">
+                            <i *ngIf="!isTramRide(ride.link)" class="ion-ios-bus ride-link-stats-icon"></i>
+                            <i *ngIf="isTramRide(ride.link)" class="ion-ios-train ride-link-stats-icon"></i>
+                        </div>
+                        <div class="driver-item-info">
+                            <label class="driver-item-title"><span class="blue-text">Služba: {{ride.service}}
+                                <i class="ion-ios-calendar-outline"></i></span>
+                                {{ride.date | date: 'dd.MM.yyyy'}}
+                                <span class="blue-text"><i class="ion-ios-clock-outline"></i></span>
+                                {{ride.date | date: 'HH:mm:ss'}}</label>
+                            <p class="info">
+                                <span *ngIf="ride.rating"><span class="blue-text">Rating:</span> {{ride.rating | number:'1.0-2'}}%</span>
+                                <span class="blue-text">Linka:</span> {{ride.link}}
+                                <span class="blue-text">Smer: </span><span *ngFor="let link of links | async">
+                                    <span *ngIf="ride.link === link.name && ride.direction">{{link.oneDirection | directionToString}}</span>
+                                    <span *ngIf="ride.link === link.name && !ride.direction">{{link.zeroDirection | directionToString}}</span>
+                                </span>
+                            </p>
+                        </div>
+
+                        <button class="right-button" [routerLink]="['/on-map', ride._id]">
+                            <i class="ion-ios-navigate-outline right-button-icon"></i><br/>
+                            <label class="slide-icon-text">Na mape</label>
+                        </button>
+
+                        <button class="right-button" [routerLink]="['/monitoring', ride._id]">
+                            <i class="ion-ios-analytics-outline right-button-icon"></i><br/>
+                            <label class="slide-icon-text">Graf</label>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+            <div *ngIf="rides && rides_count !== 0" class="row pagination">
+                <pagination-controls class="stats-pagination" (pageChange)="p = $event" autoHide="true"
+                                     previousLabel="predchádzajúca" nextLabel="nasledujúca"
+                                     id="rides"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

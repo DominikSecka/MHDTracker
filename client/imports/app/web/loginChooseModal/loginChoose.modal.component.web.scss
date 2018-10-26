@@ -1,0 +1,46 @@
+.login-choose-div{
+  text-align: center;
+  opacity: 0.5;
+
+  .login-choose-label{
+    font-size: 25px;
+    color: darkgrey;
+    margin-top: 10px;
+  }
+
+  .login-choose-label:hover{
+    color: dodgerblue;
+  }
+}
+
+.login-choose-div:hover{
+  opacity: 1;
+}
+
+.simple-modal-button{
+  outline: none !important;
+  border: 1px solid dodgerblue;
+  color: dodgerblue;
+  border-radius: 20px;
+  background-color: transparent;
+  padding: 8px 10px;
+  margin-bottom: 20px;
+}
+
+.simple-modal-button:hover{
+  color: white;
+  background-color: dodgerblue;
+}
+
+.horizontal-buttons-div{
+  margin-bottom: 40px;
+}
+
+.modal-cancel-button{
+  float: right;
+  outline: none !important;
+  color: dodgerblue;
+  background-color: transparent;
+  font-size: 45px;
+  margin-right: 20px;
+}

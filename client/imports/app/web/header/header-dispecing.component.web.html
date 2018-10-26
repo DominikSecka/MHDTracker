@@ -1,0 +1,14 @@
+<div class="header-page-content">
+    <div class="row container-header">
+        <img class="header-picture" src="images/dispatcher.svg">
+        <span class="main-title">Dispečing</span>
+        <div class="right-div">
+            <label class="header-username">{{name}}</label>
+            <div style="display: inline-block; height: 42px; width: 40px">
+                <img *ngIf="!pictureUrl" class="dispecer-picture" src="images/dispatcher.svg">
+                <img *ngIf="pictureUrl" class="dispecer-picture" [src]="pictureUrl">
+            </div>
+            <i class="ion-ios-settings-outline header-right-icon" (click)="settingsClicked()"></i>
+        </div>
+    </div>
+</div>

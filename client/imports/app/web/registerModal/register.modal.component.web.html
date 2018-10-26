@@ -1,0 +1,78 @@
+<div class="container-fluid custom-modal-container">
+    <div class="row custom-modal-header">
+        <div class="col-sm-12 modal-header">
+            <i style="margin-top: -16px" class="ion-ios-add-circle-outline modal-header-icon"></i>
+            <label style="margin-left: 50px" class="modal-header-label">Registrácia</label>
+            <button class="modal-cancel-button" (click)="closeDialog()"><i class="ion-ios-close-circle-outline"></i></button>
+            <button style="margin-right: 5px" class="modal-cancel-button" (click)="backToChoose()"><i class="ion-ios-arrow-dropleft-outline"></i></button>
+        </div>
+    </div>
+    <div class="col-md-4" style="text-align: center">
+        <div #upload class="add-picture-div picture-update-container">
+            <div fileDrop
+                 [ngClass]="{'file-is-over': fileIsOver, 'file-uploading': uploading}"
+                 (fileOver)="fileOver($event)"
+                 (onFileDrop)="onFileDrop($event)">
+                <!--<img class="add-driver-picture" [src]="images/user.svg">-->
+                <img *ngIf="!uploading" class="add-driver-picture" [src]="thumb_url">
+                <loader marginTop="-5px" *ngIf="uploading"></loader>
+            </div>
+        </div><br/>
+        <input (change)="onFileChange($event)" hidden="hidden" type="file" accept="image/*" #file min="1" max="1">
+        <button (click)="file.click()" class="add-driver-picture-button">
+            <label style="margin-bottom: .13em; margin-top: 4px"><i class="ion-ios-create-outline"></i></label>
+        </button>
+    </div>
+    <div class="col-md-8">
+        <form [formGroup]="registrationForm">
+            <div class="form-line">
+                <div style="height: 10px">
+                    <div class="error-box" *ngIf="formErrors.newUserName">
+                        {{formErrors.newUserName}}
+                    </div>
+                </div>
+                <i style="margin-top: -18px" class="ion-ios-contact-outline form-input-icon"></i>
+                <input style="margin-left: 35px" formControlName="newUserName" class="login-input email-input" placeholder="meno a priezvisko">
+            </div>
+            <div class="form-line">
+                <div class="error-box" *ngIf="formErrors.newUserEmail">
+                    {{formErrors.newUserEmail}}
+                </div>
+                <i style="margin-top: -18px" class="ion-ios-mail-open-outline form-input-icon"></i>
+                <input style="margin-left: 35px" formControlName="newUserEmail" class="login-input email-input" placeholder="e-mail">
+            </div>
+            <div class="form-line">
+                <div class="error-box" *ngIf="formErrors.newUserPassword">
+                    {{formErrors.newUserPassword}}
+                </div>
+                <div style="margin-top: 3px" class="error-box" *ngIf="formErrors.newUserRetypePassword">
+                    {{formErrors.newUserRetypePassword}}
+                </div>
+                <i style="margin-left: 3px; margin-top: -18px" class="ion-ios-lock-outline form-input-icon"></i>
+                <input style="margin-left: 35px; width: 38%;" formControlName="newUserPassword" class="login-input password-input" type="{{ showPassword ? 'text' : 'password' }}" placeholder="vytvorte heslo">
+                <input style="width: 38%;" formControlName="newUserRetypePassword" class="login-input password-input" type="{{ showPassword ? 'text' : 'password' }}" placeholder="zopakujte heslo" validateEqualTo="newUserPassword">
+                <i (click)="showHidePasswd()" class="{{ showPassword ? 'ion-ios-eye vision-icon' : 'ion-ios-eye-outline vision-icon' }}"></i>
+            </div>
+            <div class="form-line">
+                <label style="font-size: 15px;" class="grey-text info-forgot-password">Na registrovanie nového používateľa je potrebná autorizácia, z tohto dôvodu je potrebné zadať prihlasovacie údaje už registrovaného dispečera.</label>
+            </div>
+            <div class="form-line">
+                <div class="error-box" *ngIf="formErrors.dispatcherEmail">
+                    {{formErrors.dispatcherEmail}}
+                </div>
+                <i style="margin-top: -20px" class="ion-ios-mail-open-outline form-input-icon"></i>
+                <input class="login-input login-email-input" formControlName="dispatcherEmail" placeholder="e-mail">
+            </div>
+            <div class="form-line">
+                <div class="error-box" *ngIf="formErrors.dispatcherPassword">
+                    {{formErrors.dispatcherPassword}}
+                </div>
+                <i style="margin-left: 3px; margin-top: -20px" class="ion-ios-lock-outline form-input-icon"></i>
+                <input class="login-input login-password-input" formControlName="dispatcherPassword" type="password" placeholder="heslo">
+            </div>
+            <div class="form-line" style="margin-bottom: 30px">
+                <button style="width: 99.5%" class="simple-modal-button" [disabled]="!registrationForm.valid" (click)="registerNewUser()">Registrovať</button>
+            </div>
+        </form>
+    </div>
+</div>

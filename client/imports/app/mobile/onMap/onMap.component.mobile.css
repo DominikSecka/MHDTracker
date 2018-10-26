@@ -1,0 +1,9 @@
+.sebm-google-map-container {
+  height: 100%;
+  width: 100%;
+}
+
+sebm-google-map {
+  padding: 0;
+}
+

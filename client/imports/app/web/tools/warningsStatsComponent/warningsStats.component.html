@@ -1,0 +1,66 @@
+<div class="warnings-div">
+    <div class="col-md-3">
+        <span *ngIf="accelerWarningCount === 0">
+            <img class="grey-warning"
+                 src="images/warnings/acceleration_grey.svg">
+            <div class="warning-count-div">
+                <span class="count-label">{{accelerWarningCount}}</span>
+            </div>
+        </span>
+        <span *ngIf="accelerWarningCount !== 0">
+            <img class="red-warning"
+                 src="images/warnings/ACCELERATIONRED.svg">
+            <div class="red-warning-count-div">
+                <span class="count-label">{{accelerWarningCount}}</span>
+            </div>
+        </span>
+    </div>
+    <div class="col-md-3">
+        <span *ngIf="breaksWarningCount === 0">
+            <img class="grey-warning"
+                 src="images/warnings/breaks_grey.svg">
+            <div class="warning-count-div">
+                <span class="count-label">{{breaksWarningCount}}</span>
+            </div>
+        </span>
+        <span *ngIf="breaksWarningCount !== 0">
+            <img class="red-warning"
+                 src="images/warnings/BREAKINGRED.svg">
+            <div class="red-warning-count-div">
+                <span class="count-label">{{breaksWarningCount}}</span>
+            </div>
+        </span>
+    </div>
+    <div class="col-md-3">
+        <span *ngIf="leftWarningCount === 0">
+            <img class="grey-warning"
+                 src="images/warnings/left_grey.svg">
+            <div class="warning-count-div">
+                <span class="count-label">{{leftWarningCount}}</span>
+            </div>
+        </span>
+        <span *ngIf="leftWarningCount !== 0">
+            <img class="red-warning"
+                 src="images/warnings/LEFT_TURNRED.svg">
+            <div class="red-warning-count-div">
+                <span class="count-label">{{leftWarningCount}}</span>
+            </div>
+        </span>
+    </div>
+    <div class="col-md-3">
+        <span *ngIf="rightWarningCount === 0">
+            <img class="grey-warning"
+                 src="images/warnings/right_grey.svg">
+            <div class="warning-count-div">
+                <span class="count-label">{{rightWarningCount}}</span>
+            </div>
+        </span>
+        <span *ngIf="rightWarningCount !== 0">
+            <img class="red-warning"
+                 src="images/warnings/RIGHT_TURNRED.svg">
+            <div class="red-warning-count-div">
+                <span class="count-label">{{rightWarningCount}}</span>
+            </div>
+        </span>
+    </div>
+</div>

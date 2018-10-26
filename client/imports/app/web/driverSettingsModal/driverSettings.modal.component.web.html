@@ -1,0 +1,88 @@
+<div class="container-fluid custom-modal-container">
+    <div class="row custom-modal-header">
+        <div class="col-sm-12 modal-header">
+            <i class="ion-ios-settings-outline modal-header-icon"></i>
+            <label class="modal-header-label">Možnosti</label>
+            <button class="modal-cancel-button" (click)="closeDialog()" style="margin-top: -15px;"><i class="ion-ios-close-circle-outline"></i></button>
+        </div>
+    </div>
+    <div>
+        <div class="col-md-12 main-settings-title-div" style="margin-top: -15px;">
+            <i class="ion-ios-construct-outline form-input-icon"></i>
+            <label style="padding-left: 5px;" class="settings-label blue-text">Nastavenie účtu</label>
+        </div>
+        <div>
+            <div class="main-system-settings-div">
+                <div class="col-md-12" style="margin-top: 20px">
+                    <div class="form-line">
+                        <button style="width: 24%" class="simple-modal-button" (click)="logout()">Odhlásiť</button>
+                        <button style="width: 40%; margin-left: 5px;" class="simple-modal-button" (click)="changePassword()">Zneniť prístupové heslo</button>
+                        <button style="width: 32%; margin-left: 5px;" class="simple-modal-button" (click)="changeEmail()">Zneniť email</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 main-settings-title-div">
+            <i class="ion-ios-contact-outline form-input-icon"></i>
+            <label class="settings-label blue-text">Upraviť profil</label>
+        </div>
+        <div class="col-md-12" style="margin-top: 15px; margin-bottom: 20px">
+            <form [formGroup]="driverEditForm">
+                <div class="col-md-4" style="text-align: center; padding: 0;">
+                    <div #upload class="add-picture-div picture-update-container">
+                        <div fileDrop
+                             [ngClass]="{'file-is-over': fileIsOver, 'file-uploading': uploading}"
+                             (fileOver)="fileOver($event)"
+                             (onFileDrop)="onFileDrop($event)">
+                            <img *ngIf="!thumb_url && !uploading" class="add-driver-picture" src="images/user.svg">
+                            <img *ngIf="!uploading && thumb_url" class="add-driver-picture" [src]="thumb_url">
+                            <loader marginTop="-5px" *ngIf="uploading"></loader>
+                        </div>
+                    </div><br/>
+                    <input (change)="onFileChange($event)" hidden="hidden" type="file" accept="image/*" #file min="1" max="1">
+                    <button (click)="file.click()" class="add-driver-picture-button">
+                        <label><i class="ion-ios-create-outline"></i></label>
+                    </button>
+                </div>
+                <div class="col-md-8" style="margin-top: 5px;">
+                    <div class="form-line">
+                        <div style="height: 10px">
+                            <div class="error-box" *ngIf="formErrors.name">
+                                {{formErrors.name}}
+                            </div>
+                        </div>
+                        <i class="ion-ios-contact-outline form-input-icon"></i>
+                        <input style="margin-left: 35px" class="add-driver-input email-input" formControlName="name" [(ngModel)]="context.driver.name" placeholder="meno a priezvisko">
+                    </div>
+                    <div class="form-line">
+                        <div class="error-box" *ngIf="formErrors.birthday">
+                            {{formErrors.birthday}}
+                        </div>
+                        <i style="margin-top: -10px; margin-left: 1px" class="ion-ios-calendar-outline form-input-icon"></i>
+                        <my-date-picker style="margin-left: 35px" [options]="myDatePickerOptions" [placeholder]="placeholder"
+                                        [(ngModel)]="model" (dateChanged)="onDateChanged($event)" formControlName="birthday"></my-date-picker>
+                    </div>
+                    <div class="form-line" style="margin-top: 20px; text-align: left;">
+                        <div class="error-box" *ngIf="formErrors.sex">
+                            {{formErrors.sex}}
+                        </div>
+                        <i style="margin-top: -15px" class="ion-ios-information-circle-outline form-input-icon"></i>
+                        <label class="add-driver-info-label">Pohlavie:</label>
+                        <label class="radio-inline sex-radio"><input class="sex-radio-input" type="radio"  formControlName="sex" value="M"><i class="ion-ios-man info-input-icon"></i>muž</label>
+                        <label class="radio-inline sex-radio"><input class="sex-radio-input" type="radio"  formControlName="sex" value="F"><i class="ion-ios-woman info-input-icon"></i>žena</label>
+                    </div>
+                    <div class="form-line" style="width: 91%;">
+                        <div class="error-box" *ngIf="formErrors.driverPassword">
+                            {{formErrors.driverPassword}}
+                        </div>
+                        <i style="margin-left: 3px; margin-top: -15px" class="ion-ios-lock-outline form-input-icon"></i>
+                        <input class="login-input login-password-input" formControlName="driverPassword" type="password" placeholder="heslo">
+                    </div>
+                    <div class="form-line" style="margin-bottom: 20px; width: 93%;">
+                        <button style="width: 99.5%" class="simple-modal-button" [disabled]="!driverEditForm.valid" (click)="updateDriver()">Upraviť profil vodiča</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

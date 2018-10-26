@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "28591032319",
+    "firebase_url": "https://mhdtracker-c3fd3.firebaseio.com",
+    "project_id": "mhdtracker-c3fd3",
+    "storage_bucket": "mhdtracker-c3fd3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28591032319:android:a1a0ca7acd290b93",
+        "android_client_info": {
+          "package_name": "in.proke.mhdtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28591032319-41c4b0pminaap9tdu3ac81v1ic5r96uh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.proke.mhdtracker",
+            "certificate_hash": "13c83bc978fc3731e6837c209ad374234629e805"
+          }
+        },
+        {
+          "client_id": "28591032319-01t63rf0rirpempm9f4l2hjbhl51qres.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.proke.mhdtracker",
+            "certificate_hash": "4966d00d934d547c88b553b173ee871e0b0369eb"
+          }
+        },
+        {
+          "client_id": "28591032319-e9dguhjjsiuef6nu6mite9ggh4mjqqhq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9JC8f5fUUlgpkDeYZCkn9rHeQMOwDlEI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28591032319-e9dguhjjsiuef6nu6mite9ggh4mjqqhq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

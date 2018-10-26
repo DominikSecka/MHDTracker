@@ -1,0 +1,77 @@
+.settings-div{
+  height: 548px;
+  .main-settings-title-div{
+    margin-bottom: 15px;
+  }
+}
+
+.settings-label{
+  color: dodgerblue;
+  font-size: 2em;
+  margin-left: 35px;
+  line-height: 0.7;
+}
+
+.settings-form-icon{
+  font-size: 2em;
+  color: dodgerblue;
+  position: absolute;
+  margin-top: -10px;
+}
+
+.settings-form-labels{
+  margin-left: 25px;
+  color: dodgerblue;
+}
+
+.main-system-settings-div{
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.noUi-horizontal{
+  height: 10px !important;
+}
+
+.noUi-connect{
+  background: dodgerblue !important;
+  border-radius: 3px !important;
+}
+
+.noUi-handle:after, .noUi-handle:before{
+  height: 6px !important;
+}
+
+.noUi-handle {
+  border-radius: 10px !important;
+}
+
+.noUi-horizontal .noUi-handle{
+  height: 20px !important;
+}
+
+.noUi-target{
+  box-shadow: none !important;
+}
+
+.slider{
+  margin-bottom: 10px;
+  height: 10px;
+}
+
+.global-settings-icon{
+  font-size: 25px;
+  position: absolute;
+  margin-top: -7px;
+}
+
+.global-settings-label{
+  margin-left: 25px;
+}
+
+.settings-item-picture {
+  border-radius: 50%;
+  width: 35px;
+  margin-right: 5px;
+  margin-top: -17px;
+}

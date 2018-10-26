@@ -1,0 +1,36 @@
+.on-map {
+  .sebm-google-map-container {
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  sebm-google-map {
+    padding: 0;
+  }
+
+  .ride-info-map-div{
+    position: relative;
+    width: 25%;
+    max-width: 360px;
+    min-width: 360px;
+    margin: 15px;
+    padding: 10px;
+    height: 50%;
+    background: white;
+    opacity: 0.8;
+    border-radius: 10px;
+  }
+}
+
+.map-driver-picture{
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
+
+

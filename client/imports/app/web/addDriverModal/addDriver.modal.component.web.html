@@ -1,0 +1,102 @@
+<div class="container-fluid custom-modal-container">
+    <div class="row custom-modal-header">
+        <div class="col-sm-12 modal-header">
+            <i class="ion-ios-person-add-outline modal-header-icon"></i>
+            <label class="modal-header-label">Pridať vodiča</label>
+            <button class="modal-cancel-button" style="margin-top: -15px;" (click)="closeDialog()"><i class="ion-ios-close-circle-outline"></i></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="margin-top: -15px;">
+            <form [formGroup]="addDriverForm">
+                <div class="col-md-4" style="text-align: center">
+                    <div #upload class="add-picture-div picture-update-container">
+                        <div fileDrop
+                             [ngClass]="{'file-is-over': fileIsOver, 'file-uploading': uploading}"
+                             (fileOver)="fileOver($event)"
+                             (onFileDrop)="onFileDrop($event)">
+                                    <!--<img class="add-driver-picture" [src]="images/user.svg">-->
+                            <img *ngIf="!uploading" class="add-driver-picture" [src]="thumb_url">
+                            <loader marginTop="-5px" *ngIf="uploading"></loader>
+                        </div>
+                    </div><br/>
+                    <input (change)="onFileChange($event)" hidden="hidden" type="file" accept="image/*" #file min="1" max="1">
+                    <button (click)="file.click()" class="add-driver-picture-button">
+                        <label><i class="ion-ios-create-outline"></i></label>
+                    </button>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-line">
+                        <div style="height: 10px">
+                            <div class="error-box" *ngIf="formErrors.name">
+                                {{formErrors.name}}
+                            </div>
+                        </div>
+                        <i class="ion-ios-contact-outline form-input-icon"></i>
+                        <input style="margin-left: 35px" class="add-driver-input email-input" formControlName="name" placeholder="meno a priezvisko">
+                    </div>
+                    <div class="form-line">
+                        <div class="error-box" *ngIf="formErrors.email">
+                            {{formErrors.email}}
+                        </div>
+                        <i style="margin-left: 1px" class="ion-ios-mail-open-outline form-input-icon"></i>
+                        <input style="margin-left: 35px" class="add-driver-input email-input" formControlName="email" placeholder="e-mail">
+                    </div>
+                    <div class="form-line">
+                        <div class="error-box" *ngIf="formErrors.passwd">
+                            {{formErrors.passwd}}
+                        </div>
+                        <div style="margin-top: 3px" class="error-box" *ngIf="formErrors.retype_passwd">
+                            {{formErrors.retype_passwd}}
+                        </div>
+                        <i style="margin-left: 3px" class="ion-ios-lock-outline form-input-icon"></i>
+                        <input style="margin-left: 35px" class="add-driver-input password-input" formControlName="passwd" type="{{ showPassword ? 'text' : 'password' }}" placeholder="vytvorte heslo">
+                        <input class="add-driver-input password-input" formControlName="retype_passwd" type="{{ showPassword ? 'text' : 'password' }}" placeholder="zopakujte heslo" validateEqualTo="passwd">
+                        <i (click)="showHidePasswd()" class="{{ showPassword ? 'ion-ios-eye vision-icon' : 'ion-ios-eye-outline vision-icon' }}"></i>
+                    </div>
+                    <div class="form-line">
+                        <div class="error-box" *ngIf="formErrors.birthday">
+                            {{formErrors.birthday}}
+                        </div>
+                        <i style="margin-top: -11px; margin-left: 1px" class="ion-ios-calendar-outline form-input-icon"></i>
+                        <my-date-picker formControlName="birthday" style="margin-left: 35px" [options]="myDatePickerOptions" [placeholder]="placeholder"
+                                        (dateChanged)="onDateChanged($event)"></my-date-picker>
+                    </div>
+                    <div class="form-line" style="margin-top: 10px; text-align: left;">
+                        <div class="error-box" *ngIf="formErrors.sex">
+                            {{formErrors.sex}}
+                        </div>
+                        <i style="margin-top: -15px" class="ion-ios-information-circle-outline form-input-icon"></i>
+                        <label class="add-driver-info-label">Pohlavie:</label>
+                        <label class="radio-inline sex-radio"><input class="sex-radio-input" type="radio" formControlName="sex" value="M"><i class="ion-ios-man info-input-icon"></i>muž</label>
+                        <label class="radio-inline sex-radio"><input class="sex-radio-input" type="radio" formControlName="sex" value="F"><i class="ion-ios-woman info-input-icon"></i>žena</label>
+                    </div>
+                    <div class="form-line" style="margin-top: 15px; text-align: left;">
+                        <div class="error-box" *ngIf="formErrors.vehicles">
+                            {{formErrors.vehicles}}
+                        </div>
+                        <i style="margin-top: -15px; margin-left: 0" class="ion-ios-speedometer-outline form-input-icon"></i>
+                        <label class="add-driver-info-label">Vozidlo:</label>
+                        <div formArrayName="vehicles" style="display: inline-block;">
+                            <label class="checkbox-inline vehicle-checkbox"><input class="vehicle-checkbox-input" type="checkbox" formControlName="tram"><i class="ion-ios-train info-input-icon"></i>električka</label>
+                            <label class="checkbox-inline vehicle-checkbox"><input class="vehicle-checkbox-input" type="checkbox" formControlName="bus"><i class="ion-ios-bus info-input-icon"></i>autobus</label>
+                        </div>
+                    </div>
+                    <div class="form-line" style="width: 91%;">
+                        <label style="font-size: 15px;" class="grey-text info-forgot-password">Na registrovanie nového vodiča je potrebná autorizácia, z tohto dôvodu je potrebné na overenie Vašej totožnosti znovu zadať Vaše heslo.</label>
+                    </div>
+                    <div class="form-line" style="width: 91%;">
+                        <div class="error-box" *ngIf="formErrors.dispatcherPassword">
+                            {{formErrors.dispatcherPassword}}
+                        </div>
+                        <i style="margin-left: 3px; margin-top: -17px" class="ion-ios-lock-outline form-input-icon"></i>
+                        <input class="login-input login-password-input" formControlName="dispatcherPassword" type="password" placeholder="heslo">
+                    </div>
+                    <div class="form-line" style="margin-bottom: 30px; width: 92%;">
+                        <button style="width: 99.5%" class="simple-modal-button" [disabled]="!addDriverForm.valid" (click)="addDriver()">Pridať vodiča</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

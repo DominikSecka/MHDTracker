@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Vodiči</ion-title>
+
+        <ion-buttons end>
+            <button ion-button icon-right (click)="addDriverClicked()">
+                Pridať
+                <ion-icon name="ios-person-add-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-searchbar placeholder="Hľadať" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list class="drivers-page-content">
+        <ion-item-sliding *ngFor="let driver of drivers | async">
+            <ion-item class="driver" detail-push>
+                <img *ngIf="driver.picture" class="driver-picture" [src]="driver.pictureUrl">
+                <img *ngIf="!driver.picture" class="driver-picture" src="images/user.svg">
+                <div class="driver-info">
+                    <h2 class="driver-title">{{driver.name}}</h2>
+
+                    <span>
+                        <p>Hodnotenie: {{driver.rating | number:'2.0-2'}}% Vozidlo:
+                            <ion-icon *ngIf="driver.bus" name="ios-bus"></ion-icon>
+                            <ion-icon *ngIf="driver.tram" name="ios-train"></ion-icon>
+                        </p>
+
+                    <!--<span class="last-message-timestamp">{{chat.lastMessage.createdAt }}</span>-->
+                    </span>
+                </div>
+                <!--<ion-icon name="ios-arrow-dropright-outline" class="right-icon"></ion-icon>-->
+            </ion-item>
+            <ion-item-options class="traffic-options">
+                <button ion-button item-right icon-left class="option" color="light" (click)="statisticsClicked()">
+                    <ion-icon name="ios-stats-outline" class="slide-icon"></ion-icon>
+                    <label class="slide-icon-text">Štatistika</label>
+                </button>
+                <button ion-button item-right icon-left class="option" color="light" (click)="editDriverClicked(driver)">
+                    <ion-icon name="ios-create-outline" class="slide-icon"></ion-icon>
+                    <label class="slide-icon-text">Upraviť</label>
+                </button>
+                <button ion-button item-right icon-left class="option" color="light" (click)="removeDriverClicked(driver)">
+                    <ion-icon name="ios-trash-outline" class="slide-icon"></ion-icon>
+                    <label class="slide-icon-text">Odstrániť</label>
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+</ion-content>

@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "target": "es5",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "client/**/*",
+    "both/**/*",
+    "server/**/*"
+  ],
+  "typeRoots": [
+    "../node_modules/@types"
+  ],
+  "files": [
+    "./node_modules/firebase/firebase.d.ts",
+    "typings.d.ts",
+    "meteor.d.ts"
+  ],
+  "filesGlob": [
+    "app/**/*.ts"
+  ],
+  "types": [
+    "firebase",
+    "node"
+  ],
+  "compileOnSave": false,
+  "angularCompilerOptions": {
+    "genDir": "aot",
+    "skipMetadataEmit": true
+  }
+}

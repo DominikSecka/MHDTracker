@@ -1,0 +1,49 @@
+<div class="row tools-div">
+    <form class="navbar-form">
+        <i class="ion-ios-search-outline search-icon grey-text"></i>
+        <input type="text" class="form-control" placeholder="Hľadať" (input)="searchValuechange($event.target.value)">
+
+    </form>
+</div>
+
+
+<loader *ngIf="!rides"></loader>
+
+<rides-not-found *ngIf="ridesSize === 0 && rides"></rides-not-found>
+
+<ul *ngIf="rides && ridesSize !== 0" class="list-group drivers-list-group">
+    <li *ngFor="let ride of rides | async | paginate: { itemsPerPage: 10, currentPage: p, totalItems: ridesSize, id: 'traffic' }" class="list-group-item drivers-item-content">
+        <div class="row driver-item-row">
+            <img class="driver-item-picture" [src]="'images/links/'+ride.link+'.svg'">
+            <div class="ride-link-icon-div">
+                <i *ngIf="!isTramRide(ride.link)" class="ion-ios-bus ride-link-icon"></i>
+                <i *ngIf="isTramRide(ride.link)" class="ion-ios-train ride-link-icon"></i>
+            </div>
+            <div class="driver-item-info">
+                <label class="driver-item-title"><span *ngFor="let driver of drivers | async"><span class="blue-text" *ngIf="driver._id === ride.driver_id">{{driver.name}} <i
+                        class="ion-ios-calendar-outline"></i></span></span>
+                    {{ride.date | date: 'dd.MM.yyyy'}} <span class="blue-text"><i
+                            class="ion-ios-clock-outline"></i></span> {{ride.date | date:'HH:mm:ss'}}</label>
+                <p class="info"><span class="blue-text">Linka:</span> {{ride.link}} <span class="blue-text">Smer:</span>
+                    <span *ngFor="let link of links | async">
+                        <span *ngIf="ride.link === link.name && ride.direction">{{link.oneDirection | directionToString}}</span>
+                        <span *ngIf="ride.link === link.name && !ride.direction">{{link.zeroDirection | directionToString}}</span>
+                    </span> <span class="blue-text">Služba:</span>
+                    {{ride.service}}</p>
+            </div>
+
+            <button class="right-button" [routerLink]="['/on-map', ride._id]">
+                <i class="ion-ios-navigate-outline right-button-icon"></i><br/>
+                <label class="slide-icon-text">Na mape</label>
+            </button>
+
+            <button class="right-button" [routerLink]="['/monitoring', ride._id]">
+                <i class="ion-ios-analytics-outline right-button-icon"></i><br/>
+                <label class="slide-icon-text">Monitoring</label>
+            </button>
+        </div>
+    </li>
+</ul>
+<div *ngIf="rides" class="row pagination">
+    <pagination-controls class="main-pagination" (pageChange)="p = $event" autoHide="true" previousLabel="predchádzajúca" nextLabel="nasledujúca" id="traffic"></pagination-controls>
+</div>

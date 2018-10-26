@@ -1,0 +1,150 @@
+<link href='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.0.0/nouislider.min.css' rel="stylesheet">
+
+<div class="container-fluid custom-modal-container">
+    <div class="row custom-modal-header">
+        <div class="col-sm-12 modal-header">
+            <i class="ion-ios-settings-outline modal-header-icon"></i>
+            <label class="modal-header-label">Možnosti</label>
+            <button class="modal-cancel-button" (click)="closeDialog()" style="margin-top: -15px;"><i class="ion-ios-close-circle-outline"></i></button>
+        </div>
+    </div>
+    <div class="settings-div">
+        <div class="col-md-12 main-settings-title-div" style="margin-top: -15px;">
+            <i class="ion-ios-construct-outline form-input-icon"></i>
+            <label style="padding-left: 5px;" class="settings-label blue-text">Nastavenie účtu</label>
+        </div>
+        <div>
+            <div class="main-system-settings-div">
+                <div class="col-md-12" style="margin-bottom: 20px">
+                    <div class="col-md-4" style="text-align: center; margin-left: 20px">
+                        <div #upload class="add-picture-div picture-update-container" style="margin-left: -27px">
+                            <div fileDrop
+                                 [ngClass]="{'file-is-over': fileIsOver, 'file-uploading': uploading}"
+                                 (fileOver)="fileOver($event)"
+                                 (onFileDrop)="onFileDrop($event)">
+                                <img *ngIf="!thumb_url && !uploading" class="add-driver-picture" src="images/dispatcher.svg">
+                                <img *ngIf="!uploading && thumb_url" class="add-driver-picture" [src]="thumb_url">
+                                <loader marginTop="-5px" *ngIf="uploading"></loader>
+                            </div>
+                        </div><br/>
+                        <input (change)="onFileChange($event)" hidden="hidden" type="file" accept="image/*" #file min="1" max="1">
+                        <button (click)="file.click()" class="add-driver-picture-button">
+                            <label><i class="ion-ios-create-outline"></i></label>
+                        </button>
+                    </div>
+                    <div class="col-md-8" style="padding-left: 30px; width: 62%;">
+                        <div class="form-line">
+                            <button style="width: 100%; margin-bottom: 0" class="simple-modal-button" (click)="logout()">Odhlásiť</button>
+                        </div>
+                        <div class="form-line">
+                            <button style="width: 100%; margin-bottom: 0" class="simple-modal-button" (click)="changePassword()">Zneniť prístupové heslo</button>
+                        </div>
+                        <div class="form-line">
+                            <button style="width: 100%; margin-bottom: 0" class="simple-modal-button" (click)="changeEmail()">Zneniť email</button>
+                        </div>
+                        <div class="form-line">
+                            <button style="width: 100%; margin-bottom: 0" class="simple-modal-button" (click)="deleteAccount()">Odstrániť účet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 main-settings-title-div">
+            <i class="ion-ios-analytics form-input-icon"></i>
+            <label class="settings-label">Nastavenie systému <span *ngIf="settings"><span class="grey-text">[verzia: <span>{{currentSettings.version}}]</span></span></span></label>
+        </div>
+        <div>
+            <div class="main-system-settings-div">
+                <div class="col-md-12" style="margin-bottom: 20px; margin-top: 20px">
+                    <div class="form-line">
+                        <div id="gps-accuracy-slider" class="slider"></div>
+                        <span class="grey-text"><i class="ion-ios-locate-outline global-settings-icon"></i><label class="global-settings-label">presnosť GPS: <span class="blue-text" id="accuracy"></span></label></span>
+                    </div>
+                    <div class="form-line">
+                        <div id="location-update-time" class="slider"></div>
+                        <span class="grey-text"><i class="ion-ios-clock-outline global-settings-icon"></i><label class="global-settings-label">čas aktualizácie polohy: <span class="blue-text" id="location-time"></span> s</label></span>
+                    </div>
+                    <div class="form-line">
+                        <div id="location-update-dist" class="slider"></div>
+                        <span class="grey-text"><i class="ion-ios-code-working-outline global-settings-icon" style="margin-left: 2px"></i><label class="global-settings-label">vzdialenosť prejdená medzi aktualizáciami: <span class="blue-text" id="location-distance"></span> m</label></span>
+                    </div>
+                    <div class="form-line">
+                        <div id="alpha-low-pass" class="slider"></div>
+                        <span class="grey-text"><i class="ion-ios-code-download-outline global-settings-icon" style="margin-left: 2px"></i><label class="global-settings-label">koeficient filtrovania nízkych hodnôt: <span class="blue-text" id="low-pass"></span></label></span>
+                    </div>
+                    <div class="form-line">
+                        <button style="width: 45%; margin-bottom: 0" class="simple-modal-button" (click)="lowPassToogle()"><span *ngIf="!lowPassFilter">Zapnúť filter nízkych hodnôt</span><span *ngIf="lowPassFilter">Vypnúť filter nízkych hodnôt</span></button>
+                        <button style="width: 54%; margin-bottom: 0" class="simple-modal-button" (click)="useAverageToogle()"><span *ngIf="!useAverage">Zapnúť priemerné hodnoty akcelerácie</span><span *ngIf="useAverage">Vypnúť priemerné hodnoty akcelerácie</span></button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-line">
+                        <i class="ion-ios-bus settings-form-icon"></i>
+                        <label class="settings-form-labels">Autobus</label>
+                    </div>
+                    <div class="form-line">
+                        <div id="bus_acc" class="slider"></div>
+                        <label class="grey-text">minimum: <span class="blue-text" id="bus-acc-min"></span> maximum: <span class="blue-text" id="bus-acc-max"></span></label><br/>
+                        <span><img class="settings-item-picture" src="images/warnings/acceleration_grey.svg"></span>
+                        <span class="grey-text"><label>citlovosť monitorovania<br/>prudkej akcelerácie</label></span>
+                    </div>
+                    <div class="form-line">
+                        <div id="bus_break" class="slider"></div>
+                        <label class="grey-text">minimum: <span class="blue-text" id="bus-break-min"></span> maximum: <span class="blue-text" id="bus-break-max"></span></label><br/>
+                        <span><img class="settings-item-picture" src="images/warnings/breaks_grey.svg"></span>
+                        <span class="grey-text"><label>citlovosť monitorovania<br/>prudkého brzdenia</label></span>
+                    </div>
+                    <div class="form-line">
+                        <div id="bus_turn" class="slider"></div>
+                        <label class="grey-text">minimum: <span class="blue-text" id="bus-turn-min"></span> maximum: <span class="blue-text" id="bus-turn-max"></span></label><br/>
+                        <span><img class="settings-item-picture" src="images/warnings/right_grey.svg"></span>
+                        <span class="grey-text"><label>citlovosť monitorovania<br/>prudhého zatáčania</label></span>
+                    </div>
+                    <div class="form-line">
+                        <div id="bus_gyro" class="slider"></div>
+                        <label class="grey-text">citlivosť gyroskopu: <span class="blue-text" id="bus-gyro"></span></label><br/>
+                        <span><img class="settings-item-picture" src="images/gyro.svg"></span>
+                        <span class="grey-text"><label>citlovosť gyroskopu<br/>pri zatáčaní</label></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-line">
+                        <i class="ion-ios-train settings-form-icon"></i>
+                        <label class="settings-form-labels">Električka</label>
+                    </div>
+                    <div class="form-line">
+                        <div id="tram_acc" class="slider"></div>
+                        <label class="grey-text">minimum: <span class="blue-text" id="tram-acc-min"></span> maximum: <span class="blue-text" id="tram-acc-max"></span></label><br/>
+                        <span><img class="settings-item-picture" src="images/warnings/acceleration_grey.svg"></span>
+                        <span class="grey-text"><label>citlovosť monitorovania<br/>prudkej akcelerácie</label></span>
+                    </div>
+                    <div class="form-line">
+                        <div id="tram_break" class="slider"></div>
+                        <label class="grey-text">minimum: <span class="blue-text" id="tram-break-min"></span> maximum: <span class="blue-text" id="tram-break-max"></span></label><br/>
+                        <span><img class="settings-item-picture" src="images/warnings/breaks_grey.svg"></span>
+                        <span class="grey-text"><label>citlovosť monitorovania<br/>prudkého brzdenia</label></span>
+                    </div>
+                    <div class="form-line">
+                        <div id="tram_turn" class="slider"></div>
+                        <label class="grey-text">minimum: <span class="blue-text" id="tram-turn-min"></span> maximum: <span class="blue-text" id="tram-turn-max"></span></label><br/>
+                        <span><img class="settings-item-picture" src="images/warnings/right_grey.svg"></span>
+                        <span class="grey-text"><label>citlovosť monitorovania<br/>prudhého zatáčania</label></span>
+                    </div>
+                    <div class="form-line">
+                        <div id="tram_gyro" class="slider"></div>
+                        <label class="grey-text">citlivosť gyroskopu: <span class="blue-text" id="tram-gyro"></span></label><br/>
+                        <span><img class="settings-item-picture" src="images/gyro.svg"></span>
+                        <span class="grey-text"><label>citlovosť gyroskopu<br/>pri zatáčaní</label></span>
+                    </div>
+                </div>
+                <div class="col-md-12" style="margin-bottom: 15px;">
+                    <div style="margin-right: -10px; margin-top: -15px">
+                        <button class="modal-dialog-button" [disabled]="unlocked" (click)="unlockSettings()">Odomknúť</button>
+                        <button class="modal-dialog-button" [disabled]="!unlocked" (click)="updateSettings()">Uložiť nové nastavenia</button>
+                        <button class="modal-dialog-button" (click)="resetSettings()">Resetovať aktuálne nastavenia</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

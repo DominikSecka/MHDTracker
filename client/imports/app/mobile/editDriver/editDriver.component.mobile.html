@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Upraviť profil</ion-title>
+
+        <ion-buttons end>
+            <button ion-button icon-right (click)="editDriverClicked()">
+                Uložiť
+                <ion-icon name="ios-archive-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="driverForm" (ngSubmit)="addDriver()" style="margin-top: 20px">
+        <ion-item>
+            <ion-label><ion-icon name="ios-person" class="form_icon margin"></ion-icon></ion-label>
+            <ion-input type="text" placeholder="meno" formControlName="name"></ion-input>
+        </ion-item>
+
+        <ion-list radio-group formControlName="sex">
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-item no-lines>
+                            <ion-label><ion-icon name="ios-man" class="radio_icon"></ion-icon>Muž</ion-label>
+                            <ion-radio checked="true" value="true"></ion-radio>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col>
+                        <ion-item no-lines>
+                            <ion-label><ion-icon name="ios-woman" class="radio_icon"></ion-icon>Žena</ion-label>
+                            <ion-radio checked="false" value="false"></ion-radio>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-item no-lines class="checkbox_vehicle" >
+                        <ion-label><ion-icon name="ios-bus" class="vehicle_icon"></ion-icon><label class="label_text">Autobus</label></ion-label>
+                        <ion-checkbox formControlName="bus"></ion-checkbox>
+                    </ion-item>
+                </ion-row>
+                <ion-row>
+                    <ion-item no-lines class="checkbox_vehicle">
+                        <ion-label><ion-icon name="ios-train" class="vehicle_icon"></ion-icon><label class="label_text">Električka</label></ion-label>
+                        <ion-checkbox formControlName="tram"></ion-checkbox>
+                    </ion-item>
+                </ion-row>
+            </ion-grid>
+        </ion-list>
+
+        <div padding style="position: absolute; bottom: 0px; width: 100%">
+            <button ion-button type="submit" class="submit_button" block round outline>Uložiť profil</button>
+        </div>
+    </form>
+</ion-content>

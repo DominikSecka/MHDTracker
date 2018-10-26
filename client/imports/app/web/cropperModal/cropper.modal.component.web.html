@@ -1,0 +1,24 @@
+<div class="container-fluid custom-modal-container">
+    <div class="row custom-modal-header">
+        <div class="col-sm-12 modal-header">
+            <i class="ion-ios-crop-outline modal-header-icon"></i>
+            <label class="modal-header-label">Prispôsobiť fotku</label>
+        </div>
+    </div>
+
+    <div class="cropper-div">
+        <img-cropper #cropper [image]="data2" [settings]="cropperSettings2"></img-cropper>
+    </div>
+    <br>
+    <div class="preview-outher-div">
+        <div class="preview-div">
+            <span class="result rounded" *ngIf="data2.image" >
+                <img class="rounded-picture" [src]="data2.image" [width]="cropperSettings2.croppedWidth" [height]="cropperSettings2.croppedHeight">
+            </span>
+        </div>
+        <div class="buttons-line" style="display: inline-block; float: right; margin-top: 150px">
+            <button class="modal-dialog-button" (click)="addPhoto()" #okBtn>Uložiť fotku</button>
+            <button class="modal-dialog-button" (click)="closeDialog()" #closeBtn>Zrušiť</button>
+        </div>
+    </div>
+</div>

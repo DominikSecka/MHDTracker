@@ -1,0 +1,107 @@
+<span defaultOverlayTarget></span>
+<loader marginTop="20%" *ngIf="totalDistance === 0"></loader>
+<div  *ngIf="totalDistance !== 0" class="col-md-12 intro-main-div">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="col-md-12 main-icon-div">
+                <img src="images/main_icon.svg"/>
+                <!--<label class="main-title">MHDTtracker</label>-->
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="col-md-12">
+                <img class="animated-chart" src="images/animated-chart.svg">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="margin-top: -150px;">
+        <div class="col-md-12" style="padding-right: 6%">
+            <div class="col-md-12">
+                <div class="action-buttons-div">
+                    <label class="grey-text" style="text-align: right"><span style="font-size: 38px">... komfortná jazda</span><br/>mestskou hromadnou dopravou</label>
+                    <label class="grey-text"><i class="ion-ios-train-outline intro-page-icon" style="font-size: 75px;"></i><i class="ion-ios-bus-outline intro-page-icon" style="font-size: 75px;"></i></label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="action-buttons-div">
+                    <div class="intro-page-inline-div">
+                        <i class="ion-ios-hand-outline intro-page-icon"></i>
+                    </div>
+                    <div class="intro-page-inline-div" style="vertical-align: 14px;">
+                        <button class="simple-modal-button" (click)="enterClicked()">Vstúpiť</button>
+                    </div>
+                    <div class="intro-page-inline-div">
+                        <i class="ion-ios-contacts-outline intro-page-icon"></i>
+                    </div>
+                    <div class="intro-page-inline-div" style="vertical-align: 14px;">
+                        <button class="simple-modal-button" (click)="loginClicked()">Prihlásenie</button>
+                    </div>
+                    <div class="intro-page-inline-div">
+                        <i class="ion-ios-add-circle-outline intro-page-icon"></i>
+                    </div>
+                    <div class="intro-page-inline-div" style="vertical-align: 14px;">
+                        <button class="simple-modal-button" (click)="registerClicked()">Registrácia</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" style="margin-top: 40px">
+            <div class="col-md-2 outer-rounded-div">
+                <div class="rounded-div">
+                    <img src="images/stats/drivers.svg"/>
+                </div>
+            </div>
+            <div class="col-md-2 outer-rounded-div">
+                <div class="rounded-div">
+                    <img src="images/stats/rides.svg"/>
+                </div>
+            </div>
+            <div class="col-md-2 outer-rounded-div">
+                <div class="rounded-div">
+                    <img src="images/stats/distance.svg"/>
+                </div>
+            </div>
+            <div class="col-md-2 outer-rounded-div">
+                <div class="rounded-div">
+                    <img src="images/stats/hourglass.svg"/>
+                </div>
+            </div>
+            <div class="col-md-2 outer-rounded-div">
+                <div class="rounded-div">
+                    <img src="images/stats/warnings.svg"/>
+                </div>
+            </div>
+            <div class="col-md-2 outer-rounded-div">
+                <div class="rounded-div">
+                    <img src="images/stats/star.svg"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2 text-center-div">
+                <label class="blue-text numbers-label">{{driversCount}}</label>
+                <label class="main-intro-stats-label grey-text">Počet registrovaných vodičov</label>
+            </div>
+            <div class="col-md-2 text-center-div">
+                <label class="blue-text numbers-label">{{ridesCount}}</label>
+                <label class="main-intro-stats-label grey-text">Počet monitorovaných jázd</label>
+            </div>
+            <div class="col-md-2 text-center-div">
+                <label class="blue-text numbers-label">{{totalDistance | number:'1.0-2'}} km</label>
+                <label class="main-intro-stats-label grey-text">Celková monitorovaná vzdialenosť</label>
+            </div>
+            <div class="col-md-2 text-center-div">
+                <label class="blue-text numbers-label">{{totalTime}}</label>
+                <label class="main-intro-stats-label grey-text">Celkový čas monitorovania</label>
+            </div>
+            <div class="col-md-2 text-center-div">
+                <label class="blue-text numbers-label">{{totalWarnings}}</label>
+                <label class="main-intro-stats-label grey-text">Počet upozornení na neprimeranú jazdu</label>
+            </div>
+            <div class="col-md-2 text-center-div">
+                <label class="blue-text numbers-label">{{averageRating | number:'1.0-2'}} %</label><br/>
+                <label class="main-intro-stats-label grey-text">Priemerný rating jazdy</label>
+            </div>
+        </div>
+    </div>
+</div>

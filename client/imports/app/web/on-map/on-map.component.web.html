@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div class="on-map">
+    <map-mhdtracker [rideId]="id"></map-mhdtracker>
+    <div class="ride-info-map-div">
+        <div *ngIf="driver" style="padding: 8px">
+            <img style="display: inline-block" class="map-driver-picture" [src]="driver.pictureUrl"/>
+            <div style="display: inline-block; vertical-align: middle; margin-left: 10px;">
+                <span *ngFor="let ride of rides | async">
+                    <span class="blue-text" style="font-size: 16px;">{{driver.name}}</span><br/>
+                    <span style="font-size: 12px;" *ngFor="let link of links | async">
+                        <span *ngIf="ride.link === link.name && ride.direction">{{link.oneDirection | directionToString}}</span>
+                        <span *ngIf="ride.link === link.name && !ride.direction">{{link.zeroDirection | directionToString}}</span>
+                    </span>
+                </span>
+            </div>
+            <div style="float: right; display: inline-block" *ngFor="let ride of rides | async">
+                <img class="map-driver-picture" [src]="'images/links/' + ride.link + '.svg'"/>
+            </div>
+        </div>
+        <div style="height: 300px">
+            <chart-mhdtracker [rideId]="id" [height]="300"></chart-mhdtracker>
+        </div>
+        <div *ngFor="let ride of rides | async" style="padding-left: 25px">
+            <div *ngIf="ride._id === id">
+                <label class="part-title"><i class="ion-ios-information-circle-outline"></i> Info</label>
+                <br/>
+                <label>
+                    <i class="ion-ios-card-outline stats-info-icon"></i>
+                    <span class="stats-info-label"><span class="stats-info-name">Vozidlo:</span>
+                        <i *ngIf="!isTramRide(ride.link)" class="ion-ios-bus right-button-icon"></i>
+                        <i *ngIf="isTramRide(ride.link)" class="ion-ios-train right-button-icon"></i>
+                    </span>
+                </label>
+                <br/>
+                <label>
+                    <i class="ion-ios-star-outline stats-info-icon"></i>
+                    <span class="stats-info-label"><span class="stats-info-name">Rating:</span> {{ride.rating | number:'2.0-2' }} %</span>
+                </label>
+                <br/>
+                <div class="stars-rating-div">
+                    <stars [stars-selected]="ride.rating*5/100" radius="20" stars="5" disabled="true"></stars>
+                </div>
+                <label>
+                    <i class="ion-ios-code-working-outline stats-info-icon"></i>
+                    <span class="stats-info-label"><span class="stats-info-name">Prejdená vzdialenosť:</span> {{ride.distance / 1000 | number:'.1-2'}} km</span>
+                </label>
+                <br/>
+                <label>
+                    <i class="ion-ios-stopwatch-outline stats-info-icon"></i>
+                    <span class="stats-info-label"><span class="stats-info-name">Čas za volantom:</span> {{ride.duration-3600000 | date:'HH:mm:ss'}}</span>
+                </label>
+                <br/>
+                <label>
+                    <i class="ion-ios-speedometer-outline stats-info-icon" style="margin-left: -1px"></i>
+                    <span class="stats-info-label"><span class="stats-info-name">Maximálna rýchlosť:</span> {{ride.max_speed * 3.6 | number:'.1-2'}} km/h</span>
+                </label>
+                <br/>
+                <label>
+                    <i class="ion-ios-speedometer-outline stats-info-icon" style="margin-left: -1px"></i>
+                    <span class="stats-info-label"><span class="stats-info-name">Priemerná rýchlosť:</span> {{ride.avg_speed * 3.6 | number:'.1-2'}} km/h</span>
+                </label>
+                <br/>
+                <br/>
+                <div>
+                    <label class="part-title"><i class="ion-ios-alert-outline"></i>
+                        Upozornenia</label>
+                </div>
+                <div style="margin-bottom: 80px">
+                    <warnings-mhdtracker [ride_id]="ride._id"></warnings-mhdtracker>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

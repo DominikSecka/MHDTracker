@@ -1,0 +1,44 @@
+<loader *ngIf="!waypoints" style="position: absolute; width: 100%" marginTop="3%"></loader>
+<div *ngIf="waypoints" class="map-component"
+     [ngStyle]="{ 'width': width, 'height': height, 'margin-top': marginTop, 'margin-bottom': marginBottom }">
+    <sebm-google-map #map [latitude]="lat" [longitude]="lng" [zoom]="zoom" *ngIf="waypoints">
+        <sebm-google-map-marker *ngFor="let waypoint of waypoints | async" [iconUrl]="'images/rating/'+getColorByRating(waypoint.rating)+'.png'"
+                                [latitude]="waypoint.location.latitude" [longitude]="waypoint.location.longitude">
+        </sebm-google-map-marker>
+
+        <span *ngIf="leftWarnings">
+            <sebm-google-map-marker *ngFor="let left of leftWarnings | async" [iconUrl]="'images/warnings/LEFT_TURN'+getColorByRatingForWarning(left.waypoint.r)+'.png'"
+                                    [latitude]="left.waypoint.l.la" [longitude]="left.waypoint.l.lo">
+            </sebm-google-map-marker>
+        </span>
+
+        <span  *ngIf="rightWarnings">
+            <sebm-google-map-marker *ngFor="let right of rightWarnings | async" [iconUrl]="'images/warnings/RIGHT_TURN'+getColorByRatingForWarning(right.waypoint.r)+'.png'"
+                                    [latitude]="right.waypoint.l.la" [longitude]="right.waypoint.l.lo">
+            </sebm-google-map-marker>
+        </span>
+
+        <span *ngIf="accelerationWarnings">
+            <sebm-google-map-marker *ngFor="let acceleration of accelerationWarnings | async" [iconUrl]="'images/warnings/ACCELERATION'+getColorByRatingForWarning(acceleration.waypoint.r)+'.png'"
+                                    [latitude]="acceleration.waypoint.l.la" [longitude]="acceleration.waypoint.l.lo">
+            </sebm-google-map-marker>
+        </span>
+
+        <span *ngIf="breakingWarnings">
+            <sebm-google-map-marker *ngFor="let breaking of breakingWarnings | async" [iconUrl]="'images/warnings/BREAKING'+getColorByRatingForWarning(breaking.waypoint.r)+'.png'"
+                                [latitude]="breaking.waypoint.l.la" [longitude]="breaking.waypoint.l.lo">
+            </sebm-google-map-marker>
+        </span>
+
+        <sebm-google-map-polyline strokeColor="#76FF03">
+            <sebm-google-map-polyline-point *ngFor="let waypoint of waypoints | async"
+                                            [latitude]="waypoint.location.latitude"
+                                            [longitude]="waypoint.location.longitude">
+            </sebm-google-map-polyline-point>
+    </sebm-google-map>
+</div>
+<!--<ngui-map [center]="location">-->
+<!--<traffic-layer></traffic-layer>-->
+<!--<polyline *nfFor="let waypoint of waypoints; let i = index | async"-->
+<!--[path]="'[{waypoint.location.latitude, waypoint.location.longitude},{waypoints[index + 1].location.latitude, waypoints[index + 1].location.longitude}]'"></polyline>-->
+<!--</ngui-map>-->
